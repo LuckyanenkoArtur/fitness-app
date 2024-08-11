@@ -1,0 +1,66 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 {
+    top: 1rem;
+    left: 2%;
+    right: 2%;
+  }
+
+  .auth-buttons {
+    #login {
+      margin-right: 1rem;
+    }
+
+    #login,
+    #regist {
+      background-color: #9657eb;
+      border: #9657eb;
+    }
+  }
+
+  .logo {
+    color: #9657eb;
+    font-weight: bold;
+    font-size: 1.7rem;
+  }
+}
+
+.main {
+  .brief-title {
+    font-size: 2.4rem;
+    padding: 0 {
+      top: 1.5rem;
+      bottom: 2rem;
+    }
+    text-align: center;
+  }
+  .carousel-box {
+    padding: 0 2%;
+  }
+  .programs-preview {
+    padding: 1rem 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .programs-title {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+  }
+  .free-workouts-title {
+    padding-top: 0.5rem;
+    text-align: center;
+    font-size: 1.8rem;
+  }
+
+  span {
+    color: #9657eb;
+    font-weight: bold;
+  }
+}
+
+ul.p-carousel-indicators {
+  display: none;
+}

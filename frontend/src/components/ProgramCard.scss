@@ -1,0 +1,28 @@
+.program-card {
+  width: 50%;
+  height: 10rem;
+  padding: 0 {
+    top: 1.5rem;
+    left: 1rem;
+    right: 1rem;
+  }
+  border-left: 2px solid transparent;
+  background-color: #f6f6f6;
+  border-image: linear-gradient(
+      170deg,
+      rgba(117, 3, 3, 1) 0%,
+      rgba(88, 9, 121, 1) 37%,
+      rgba(214, 27, 183, 1) 67%,
+      rgba(0, 212, 255, 1) 100%
+    )
+    1;
+
+  .title {
+    font-weight: bold;
+    font-size: 1.3rem;
+    padding-bottom: 0.5rem;
+  }
+  .description {
+    color: #6e6e6e;
+  }
+}
