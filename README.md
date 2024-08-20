@@ -1,2 +1,10 @@
-# fitness-app
-fitness-app
+## Для запуска приложения вам необходимо:
+
+1. установить Docker Desktop для Windows систем
+2. Запустить Скрип start.ps1
+
+## Для завершения работы:
+
+1. запустить Скрип stop.ps1
+
+npx ts-node src/app.ts

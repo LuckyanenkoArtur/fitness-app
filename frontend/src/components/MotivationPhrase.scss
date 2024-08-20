@@ -1,0 +1,23 @@
+.motivation-phrase {
+  font-weight: bold;
+  height: 6%;
+  padding: 0 3.5%;
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  span {
+    color: #9657eb;
+  }
+}
+
+@media only screen and (min-width: 1280px) and (max-width: 1399px) {
+}
+@media only screen and (min-width: 900px) and (max-width: 1270px) {
+  .motivation-phrase {
+    font-size: 1.2rem;
+  }
+}
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+}
+@media only screen and (min-width: 375px) and (max-width: 600px) {
+}

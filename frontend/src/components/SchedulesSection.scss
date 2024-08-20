@@ -1,0 +1,74 @@
+.schedules {
+  height: 85%;
+  width: 100%;
+  padding: 2%;
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0 1%;
+  }
+
+  .schedule-display-cards {
+    overflow-y: auto;
+    display: grid;
+    gap: 1%;
+    padding: 1%;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    height: 100%;
+  }
+}
+
+.schedule-card {
+  border-radius: 10px;
+  padding: 3%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #ae75f8;
+  color: white;
+
+  .header,
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .workout-type {
+    font-size: 1.3rem;
+  }
+
+  .workout-date {
+    font-size: 0.9rem;
+    font-weight: bold;
+  }
+
+  .workout-trainer {
+    font-size: 0.9rem;
+  }
+}
+
+@media only screen and (min-width: 1280px) and (max-width: 1399px) {
+}
+@media only screen and (min-width: 900px) and (max-width: 1270px) {
+  .schedules .title {
+    font-size: 1.2rem;
+  }
+}
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+}
+@media only screen and (min-width: 375px) and (max-width: 600px) {
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .schedule-display-cards {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .schedule-display-cards {
+    grid-template-columns: 1fr; /* Single column layout on very small screens */
+  }
+}

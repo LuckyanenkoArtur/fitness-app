@@ -1,0 +1,35 @@
+.page-header {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 {
+    top: 2rem;
+    bottom: 2rem;
+    left: 2%;
+    right: 2%;
+  }
+
+  .logo {
+    color: #9657eb;
+    font-weight: bold;
+    font-size: 1.7rem;
+  }
+
+  .exit-button {
+    background-color: #9657eb;
+    border-color: #9657eb;
+  }
+}
+
+@media only screen and (min-width: 1280px) and (max-width: 1399px) {
+}
+@media only screen and (min-width: 900px) and (max-width: 1270px) {
+  .page-header {
+    height: 5vh;
+  }
+}
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+}
+@media only screen and (min-width: 375px) and (max-width: 600px) {
+}

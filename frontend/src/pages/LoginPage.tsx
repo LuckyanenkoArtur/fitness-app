@@ -24,7 +24,7 @@ const LoginPage = () => {
 
   return (
     <div>
-      <header>
+      <header className="login-page-header">
         <div className="logo">💪FitToday</div>
         <div className="auth-buttons">
           <Button
