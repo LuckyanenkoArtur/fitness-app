@@ -1,7 +1,8 @@
-const jwt = require("jsonwebtoken");
-const db = require("../../db/index");
+import jwt from "jsonwebtoken";
+import { Response, Request } from "express";
+import db from "../db/index";
 
-const login = async (req, res) => {
+const login = async (req: Request, res: Response) => {
   try {
     const { username, password } = req.body;
     console.log(username, password);
@@ -67,10 +68,10 @@ const login = async (req, res) => {
   }
 };
 
-const logout = async (req, res) => {
+const logout = async (req: Request, res: Response) => {
   const cookies = req.cookies;
   res.clearCookie("refreshToken", { httpOnly: true });
   return res.sendStatus(204);
 };
 
-module.exports = { login, logout };
+export { login, logout };

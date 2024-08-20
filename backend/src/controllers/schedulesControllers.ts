@@ -1,7 +1,7 @@
-const { json } = require("express");
-const db = require("../../db/index");
+import db from "../db/index";
+import { Response, Request } from "express";
 
-const getAllClients = async (req, res) => {
+const getAllSchedules = async (req: Request, res: Response) => {
   try {
     const query = await db.query(`SELECT * FROM clients_view;`);
 
@@ -13,7 +13,7 @@ const getAllClients = async (req, res) => {
   }
 };
 
-const addClient = async (req, res) => {
+const addSchedule = async (req: Request, res: Response) => {
   try {
     const { firstname, lastname, surename, status, phone, comment } = req.body;
 
@@ -47,7 +47,7 @@ const addClient = async (req, res) => {
   }
 };
 
-const editClient = async (req, res) => {
+const cancelSchedule = async (req: Request, res: Response) => {
   const { id, firstname, lastname, surename, status, phone, comment } =
     req.body;
 
@@ -77,36 +77,4 @@ const editClient = async (req, res) => {
   });
 };
 
-const deleteClient = async (req, res) => {
-  try {
-    const { id } = req.body;
-    if (!id) {
-      return res.status(400).json({ message: "All data should be provided" });
-    }
-
-    const clientExistQuery = await db.query(
-      `SELECT  FROM clients_view WHERE id = '${id}';`
-    );
-
-    if (clientExistQuery.rowCount === 0)
-      return res.status(400).json({ message: "Client no exist" });
-
-    const insertUser = await db.query(
-      `DELETE FROM clients WHERE id = '${id}';`
-    );
-
-    if (insertUser.rowCount === 1) {
-      return res.status(200).json({
-        message: "Client is created",
-      });
-    }
-
-    return res.status(400).json({
-      message: "While creaing user error is rised",
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-module.exports = { getAllClients, addClient, editClient, deleteClient };
+export { getAllSchedules, addSchedule, cancelSchedule };
