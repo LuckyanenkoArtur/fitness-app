@@ -2,10 +2,14 @@ import jwt from "jsonwebtoken";
 import { Response, Request } from "express";
 import db from "../db/index";
 
+interface Credentionls {
+  username: string;
+  password: string;
+}
+
 const login = async (req: Request, res: Response) => {
   try {
-    const { username, password } = req.body;
-    console.log(username, password);
+    const { username, password }: Credentionls = req.body;
 
     if (!username || !password) {
       console.log("Username and password are required");
@@ -36,7 +40,7 @@ const login = async (req: Request, res: Response) => {
       });
     }
 
-    const acessToken = jwt.sign(
+    const acessToken: string = jwt.sign(
       {
         UserInforamation: {
           username: usersCredentials.username,
@@ -48,7 +52,7 @@ const login = async (req: Request, res: Response) => {
         expiresIn: "1h",
       }
     );
-    const refreshToken = jwt.sign(
+    const refreshToken: string = jwt.sign(
       { username: usersCredentials.username, user_id: usersCredentials.id },
       "myRefreshTokenSecret",
       {

@@ -15,7 +15,7 @@ import authHandlers from "./routes/auth";
 const app: Express = express();
 const port: number = 5000;
 
-app.use(express.static("public")); //Setup the public folder for sending photos
+app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json()); // Enable JSON data to be handled
 
 app.use(credentials);
@@ -25,8 +25,8 @@ app.use(cookieParser());
 // #--------------------------------------Routers Version 1.0.0----------------------------------------------#
 
 app.use("/", indexHandlers);
-app.use(verifyJWT);
 app.use("/auth", authHandlers);
+// app.use(verifyJWT);
 app.use("/workouts", workoutsHandlers);
 app.use("/schedules", schedulesHandlers);
 
