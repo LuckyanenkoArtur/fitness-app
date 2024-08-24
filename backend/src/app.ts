@@ -11,6 +11,7 @@ import indexHandlers from "./routes/root";
 import workoutsHandlers from "./routes/workouts";
 import schedulesHandlers from "./routes/schedules";
 import authHandlers from "./routes/auth";
+import userHandlers from "./routes/user";
 
 const app: Express = express();
 const port: number = 5000;
@@ -29,6 +30,7 @@ app.use("/auth", authHandlers);
 // app.use(verifyJWT);
 app.use("/workouts", workoutsHandlers);
 app.use("/schedules", schedulesHandlers);
+app.use("/user", userHandlers);
 
 // Router Handler for 404
 app.all("*", (req: Request, res: Response) => {

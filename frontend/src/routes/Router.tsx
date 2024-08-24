@@ -11,12 +11,10 @@ interface RootState {
     token: string | null;
     user: { id: string; username: string } | null;
   };
-  // Other slices of the state
 }
 
 export const Router = () => {
   const token = useSelector((state: RootState) => state.auth.token);
-  // const token: boolean = true;
   return (
     <BrowserRouter>
       <Routes>

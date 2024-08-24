@@ -14,6 +14,7 @@ CREATE TABLE schedules (
     start VARCHAR(255),
     user_id BIGINT REFERENCES users(id),
     workout_id BIGINT REFERENCES workouts(id)
+	state_id INT REFERENCES states(id)
 );
 
 -- Создание таблицы "Тренеровок"
@@ -24,18 +25,18 @@ CREATE TABLE workouts (
 	duration VARCHAR(255)
 )
 
--- Создание View "Диспечера"
-CREATE VIEW dispatchers_view AS
+-- Создание View "schedule_details"
+CREATE VIEW schedule_details AS
 SELECT 
-    d.id,
-	d.user_id,
-	CONCAT(d.lastname, ' ', d.firstname, ' ', d.surename) AS fullname,
-	d.phone,
-	d.email,
-	d.address,
-	d.comment,
-	u.username
-FROM 
-    dispatchers d
-JOIN 
-    users u ON u.id = d.user_id
+    s.id,
+    s.start_date,
+    u.username AS user_name,
+    w.title AS workout_title,
+    st.name AS state_name
+FROM schedules s
+JOIN users u ON s.user_id = u.id
+JOIN workouts w ON s.workout_id = w.id
+JOIN states st ON s.state_id = st.id;
+
+
+SELECT * FROM schedule_details;

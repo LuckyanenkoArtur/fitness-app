@@ -3,7 +3,9 @@ import { Response, Request } from "express";
 
 const getAllSchedules = async (req: Request, res: Response) => {
   try {
-    const query = await db.query(`SELECT * FROM clients_view;`);
+    const query = await db.query(
+      `SELECT id, start_date, workout_title, trainer, state_name FROM schedule_details;`
+    );
 
     return res.json({
       data: query.rows,

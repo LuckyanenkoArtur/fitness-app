@@ -5,6 +5,11 @@ import { useState } from "react";
 import { Button } from "primereact/button";
 import { Dropdown } from "primereact/dropdown";
 
+// Import Redux Functionality
+import { logOut } from "../api/redux/features/auth/authSlice";
+import { useLogoutMutation } from "../api/redux/features/auth/authApiSlice";
+import { useDispatch } from "react-redux";
+
 // Import Data
 import states from "../data/stateWorkout";
 
@@ -13,6 +18,15 @@ import "./homePageHeader.scss";
 
 const HomePageHeader = () => {
   const [selectedState, setSelectedState] = useState(null);
+  const dispatch = useDispatch();
+  const [sendLogoutData] = useLogoutMutation();
+  const onClickExitHandler = () => {
+    sendLogoutData({})
+      .unwrap()
+      .then(() => {
+        dispatch(logOut());
+      });
+  };
 
   return (
     <header className="page-header">
@@ -28,7 +42,12 @@ const HomePageHeader = () => {
         />
       </div>
       <div className="exit-button-container">
-        <Button label="Выход" className="exit-button" size="small" />
+        <Button
+          label="Выход"
+          className="exit-button"
+          size="small"
+          onClick={onClickExitHandler}
+        />
       </div>
     </header>
   );

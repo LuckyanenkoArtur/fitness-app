@@ -8,7 +8,8 @@ import { Carousel } from "primereact/carousel";
 // Import Custome Components
 import ProgramCard from "../components/ProgramCard";
 import carouselTrainerCardTemplate from "../components/carauselTrainerCardTemplate";
-import LoginDialog from "../components/LoginDialog";
+import LoginDialog from "../components/dialogs/LoginDialog";
+import RegisterDialog from "../components/dialogs/RegisterDialog";
 
 // Import static data
 import trainers from "../data/trainers";
@@ -33,8 +34,12 @@ const LoginPage = () => {
             onClick={() => setVisibleLogin(true)}
           />
           <LoginDialog setVisible={setVisibleLogin} visible={visibleLogin} />
-          <Button label="Регистрация" id="regist" />
-          <LoginDialog
+          <Button
+            label="Регистрация"
+            id="regist"
+            onClick={() => setVisibleRegister(true)}
+          />
+          <RegisterDialog
             setVisible={setVisibleRegister}
             visible={visibleRegister}
           />
