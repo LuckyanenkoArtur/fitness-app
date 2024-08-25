@@ -1,6 +1,11 @@
 // Import PrimeReact Components
 import { Button } from "primereact/button";
 
+import { useCancelScheduleMutation } from "../api/redux/features/schedules/schedulesApiSlice";
+
+// Scss styles
+import "./ScheduleCard.scss";
+
 interface SchedulesSectionProps {
   id: number;
   start_date: string;
@@ -9,15 +14,22 @@ interface SchedulesSectionProps {
   state_name: string;
 }
 
-const scheduleCard = ({
+const ScheduleCard = ({
   id,
   start_date,
   workout_title,
   trainer,
   state_name,
 }: SchedulesSectionProps) => {
+  const [canselSchedule] = useCancelScheduleMutation();
   return (
-    <div className="schedule-card" key={id}>
+    <div
+      className="schedule-card"
+      key={id}
+      style={{
+        backgroundColor: state_name !== "Активно" ? "lightcoral" : "#d8b0e8",
+      }}
+    >
       <div className="header">
         <div className="workout-type">{workout_title}</div>
         <div className="workout-date">{start_date}</div>
@@ -28,7 +40,20 @@ const scheduleCard = ({
         </div>
         <div>
           {state_name === "Активно" ? (
-            <Button label="Отменить" severity="danger" size="small" />
+            <Button
+              label="Отменить"
+              severity="danger"
+              size="small"
+              onClick={() => {
+                canselSchedule({
+                  id: id,
+                  state_id: 2,
+                })
+                  .unwrap()
+                  .then()
+                  .catch((error) => console.log(error));
+              }}
+            />
           ) : (
             ""
           )}
@@ -38,4 +63,4 @@ const scheduleCard = ({
   );
 };
 
-export default scheduleCard;
+export default ScheduleCard;

@@ -7,7 +7,7 @@ import {
 
 const router: Router = express.Router();
 
-router.get("/", getAllSchedules);
+router.get(`/`, getAllSchedules);
 router.post("/", addSchedule);
 router.put("/:id", cancelSchedule);
 

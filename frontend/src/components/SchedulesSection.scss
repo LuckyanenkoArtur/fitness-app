@@ -18,36 +18,6 @@
   }
 }
 
-.schedule-card {
-  border-radius: 10px;
-  padding: 3%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: #ae75f8;
-  color: white;
-
-  .header,
-  .footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .workout-type {
-    font-size: 1.3rem;
-  }
-
-  .workout-date {
-    font-size: 0.9rem;
-    font-weight: bold;
-  }
-
-  .workout-trainer {
-    font-size: 0.9rem;
-  }
-}
-
 @media only screen and (min-width: 1280px) and (max-width: 1399px) {
 }
 @media only screen and (min-width: 900px) and (max-width: 1270px) {

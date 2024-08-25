@@ -22,14 +22,35 @@ const getUser = async (req: Request, res: Response) => {
 };
 const addUser = async (req: Request, res: Response) => {
   try {
-    const query = await db.query(`SELECT * FROM workouts;`);
+    const { username, password, firstname, lastname, surename } = req.body;
 
-    query.rows.map((row: Row) => {
-      return (row.photo = `http://localhost:5000/photos/${row.id}.jpg`);
-    });
+    const query = await db.query(
+      `SELECT id FROM users WHERE username = '${username}';`
+    );
 
-    return res.json({
-      workouts: query.rows,
+    if (query.rowCount === 1) {
+      return res.status(200).json({
+        message: "Client is exist",
+      });
+    }
+
+    if (!username || !password || !firstname || !lastname || !surename) {
+      return res.status(400).json({ message: "All data should be provided" });
+    }
+
+    const insertSchedule = await db.query(
+      ` INSERT INTO users (username, password, firstname, lastname, surename)
+        VALUES ('${username}', '${password}', '${firstname}', '${lastname}', '${surename}')`
+    );
+
+    if (insertSchedule.rowCount === 1) {
+      return res.status(200).json({
+        message: "Client is created",
+      });
+    }
+
+    return res.status(400).json({
+      message: "While creaing user error is rised",
     });
   } catch (err) {
     console.log(err);

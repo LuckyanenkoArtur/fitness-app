@@ -8,12 +8,16 @@ interface User {
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getUser: builder.query<User, void>({
-      query: () => ({
+      query: () => `/user`,
+    }),
+    registUser: builder.mutation({
+      query: (data) => ({
         url: `/user`,
-        method: "GET",
+        method: "POST",
+        body: data,
       }),
     }),
   }),
 });
 
-export const { useGetUserQuery } = userApiSlice;
+export const { useGetUserQuery, useRegistUserMutation } = userApiSlice;

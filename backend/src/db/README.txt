@@ -3,11 +3,14 @@
 -- Создание таблицы "Пользователи"
 CREATE TABLE users (
 	id BIGSERIAL PRIMARY KEY,
-	username VARCHAR(255),
-	password VARCHAR(255)
+	username VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL UNIQUE,
+    firstname VARCHAR(255),
+    lastname VARCHAR(255),
+    surename VARCHAR(255)
 )
 
--- Создание таблицы "Диспетчеры"
+-- Создание таблицы "Schedules"
 CREATE TABLE schedules (
     id BIGSERIAL PRIMARY KEY,
     state VARCHAR(255),

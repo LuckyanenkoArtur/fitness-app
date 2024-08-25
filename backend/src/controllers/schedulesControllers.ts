@@ -3,8 +3,19 @@ import { Response, Request } from "express";
 
 const getAllSchedules = async (req: Request, res: Response) => {
   try {
+    const { state = "Все" } = req.query; // Get state from query parameters
+
+    if (state === "Все") {
+      const query = await db.query(
+        `SELECT id, start_date, workout_title, trainer, state_name FROM schedule_details;`
+      );
+      return res.json({
+        data: query.rows,
+      });
+    }
+
     const query = await db.query(
-      `SELECT id, start_date, workout_title, trainer, state_name FROM schedule_details;`
+      `SELECT id, start_date, workout_title, trainer, state_name FROM schedule_details WHERE state_name = '${state}';`
     );
 
     return res.json({
@@ -17,25 +28,19 @@ const getAllSchedules = async (req: Request, res: Response) => {
 
 const addSchedule = async (req: Request, res: Response) => {
   try {
-    const { firstname, lastname, surename, status, phone, comment } = req.body;
+    const user_id = 1;
+    const { start_date, workout_trainer, workout_id, workout_title } = req.body;
 
-    if (!firstname || !lastname || !surename || !status || !comment || !phone) {
+    if (!start_date || !workout_trainer || !workout_id || !workout_title) {
       return res.status(400).json({ message: "All data should be provided" });
     }
 
-    const clientExistQuery = await db.query(
-      `SELECT * FROM clients_view WHERE phone = '${phone}';`
+    const insertSchedule = await db.query(
+      ` INSERT INTO schedules (start_date, user_id, workout_id, state_id)
+        VALUES ('${start_date}', '${user_id}', '${workout_id}', '1')`
     );
 
-    if (clientExistQuery.rowCount >= 1)
-      return res.status(400).json({ message: "Client exist" });
-
-    const insertUser = await db.query(
-      ` INSERT INTO clients (lastname, firstname, surename, status, phone, comment)
-        VALUES ('${lastname}', '${firstname}', '${surename}', '${status}', '${phone}','${comment}')`
-    );
-
-    if (insertUser.rowCount === 1) {
+    if (insertSchedule.rowCount === 1) {
       return res.status(200).json({
         message: "Client is created",
       });
@@ -50,33 +55,31 @@ const addSchedule = async (req: Request, res: Response) => {
 };
 
 const cancelSchedule = async (req: Request, res: Response) => {
-  const { id, firstname, lastname, surename, status, phone, comment } =
-    req.body;
+  try {
+    const { id, state_id } = req.body;
 
-  if (!firstname || !lastname || !surename || !status || !comment || !phone) {
-    return res.status(400).json({ message: "All data should be provided" });
-  }
+    if (!id || !state_id) {
+      return res.status(400).json({ message: "All data should be provided" });
+    }
 
-  const updateClient = await db.query(
-    `UPDATE clients
-     SET lastname = '${lastname}',
-         firstname = '${firstname}',
-         surename = '${surename}',
-         status = '${status}',
-         phone = '${phone}',
-         comment = '${comment}'
-     WHERE id = '${id}'`
-  );
+    const updateClient = await db.query(
+      `UPDATE schedules
+       SET state_id = '${state_id}'
+       WHERE id = '${id}'`
+    );
 
-  if (updateClient.rowCount === 1) {
-    return res.status(200).json({
-      message: "Client is created",
+    if (updateClient.rowCount === 1) {
+      return res.status(200).json({
+        message: "schedule is updated",
+      });
+    }
+
+    return res.status(400).json({
+      message: "While creaing user error is rised",
     });
+  } catch (err) {
+    console.log(err);
   }
-
-  return res.status(400).json({
-    message: "While creaing user error is rised",
-  });
 };
 
 export { getAllSchedules, addSchedule, cancelSchedule };

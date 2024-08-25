@@ -16,8 +16,7 @@ import states from "../data/stateWorkout";
 // Import Styles
 import "./homePageHeader.scss";
 
-const HomePageHeader = () => {
-  const [selectedState, setSelectedState] = useState(null);
+const HomePageHeader = ({ selectedState, setSelectedState }) => {
   const dispatch = useDispatch();
   const [sendLogoutData] = useLogoutMutation();
   const onClickExitHandler = () => {

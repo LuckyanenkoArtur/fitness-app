@@ -1,19 +1,20 @@
 #!/bin/bash
 set -e
-echo "Edhooo"
 
+echo "--------------------------------Edhooo----------------------------------------"
 
-# Check if the database is already restored
-if [ -f /var/lib/postgresql/data/.restored ]; then
-    echo "Database already restored. Skipping..."
-    exit 0
-fi
+# Wait for PostgreSQL to be ready
+until pg_isready -U "$POSTGRES_USER" -d "$POSTGRES_DB"; do
+  echo "Waiting for PostgreSQL to be ready..."
+  sleep 2
+done
 
-# Restore the database
 echo "Restoring database..."
-pg_restore -U "$POSTGRES_USER" -d "$POSTGRES_DB" /docker-entrypoint-initdb.d/taxi-all-drive_db.sql
+pg_restore -U "$POSTGRES_USER" -d "$POSTGRES_DB" -v --clean --if-exists /docker-entrypoint-initdb.d/fit_today.sql
 
-# Mark as restored
-touch /var/lib/postgresql/data/.restored
-
-echo "Database restored successfully."
+if [ $? -eq 0 ]; then
+    echo "----------Database restored successfully.--------------------------"
+else
+    echo "Database restoration failed."
+    exit 1
+fi

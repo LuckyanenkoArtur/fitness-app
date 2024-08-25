@@ -7,6 +7,9 @@ import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import { Button } from "primereact/button";
 
+// Import RTQ
+import { useRegistUserMutation } from "../../api/redux/features/user/userApiSlice";
+
 // Import Scss styles
 import "./RegisterDialog.scss";
 
@@ -21,6 +24,9 @@ const LoginDialog = ({ visible, setVisible }: LoginDialogProps) => {
   const [lastname, setLastname] = useState("");
   const [surename, setSurename] = useState("");
   const [password, setPassword] = useState("");
+
+  const [registUser] = useRegistUserMutation();
+
   return (
     <Dialog
       header="Регистрация"
@@ -79,7 +85,28 @@ const LoginDialog = ({ visible, setVisible }: LoginDialogProps) => {
             />
           </div>
         </div>
-        <Button label="На тренеровку" className="dialog-button" />
+        <Button
+          label="На тренеровку"
+          className="dialog-button"
+          onClick={() => {
+            registUser({
+              username: username,
+              password: password,
+              firstname: firstname,
+              lastname: lastname,
+              surename: surename,
+            })
+              .unwrap()
+              .then()
+              .catch((err) => console.log(err));
+            setVisible(false);
+            setUsername("");
+            setFirstname("");
+            setLastname("");
+            setSurename("");
+            setPassword("");
+          }}
+        />
       </div>
     </Dialog>
   );

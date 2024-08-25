@@ -77,11 +77,6 @@ const LoginPage = () => {
             }
           )}
         </div>
-
-        <div className="free-workouts-title">
-          Зарегистрируйтесь уже <span>сегодня</span>, и получите{" "}
-          <span>два занятия бесплатно!</span>
-        </div>
       </div>
     </div>
   );
